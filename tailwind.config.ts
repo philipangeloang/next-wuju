@@ -6,11 +6,11 @@ export default {
     extend: {
       fontFamily: {
         poppins: "Poppins",
-        dmsans: "DM Serif Display"
+        dmsans: "DM Serif Display",
       },
       colors: {
         "main-black": "#252525",
-        "off-white": "#f2f2f2"
+        "off-white": "#f4f4f7",
       },
     },
   },
