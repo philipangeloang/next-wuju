@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   //   actionType: "Expense",
   //   source: "Budget",
   //   category: "Food",
-  //   amount: 4000,
+  //   amount: 5000,
   // });
 
   if (!user) return <div>Log in first...</div>;
