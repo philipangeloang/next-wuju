@@ -16,8 +16,8 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       </Head>
       <ClerkProvider {...pageProps}>
         <SignedIn>
-          <Sidebar />
           <Component {...pageProps} />
+          <Sidebar />
         </SignedIn>
         <SignedOut>
           <SignInPage />
