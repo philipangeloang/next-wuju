@@ -104,6 +104,7 @@ const Modal = ({ modality }: any) => {
             <div className="col-span-12 mt-60 flex justify-around gap-4">
               <div
                 onClick={() => {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
                   modality(false);
                 }}
                 className="w-full cursor-pointer rounded-lg bg-red-500 p-2 text-center font-semibold text-white"

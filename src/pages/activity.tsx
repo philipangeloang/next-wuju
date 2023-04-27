@@ -2,14 +2,13 @@ import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
 import Modal from "~/components/modal";
 import Topbar from "~/components/topbar";
-import { api } from "~/utils/api";
 
 const Activity = () => {
+  const [modal, showModal] = useState(false);
   const { user } = useUser();
 
   if (!user) return <div>Log in first...</div>;
 
-  const [modal, showModal] = useState(false);
   return (
     <>
       {modal && <Modal modality={showModal} />}
