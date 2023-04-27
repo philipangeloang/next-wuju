@@ -1,5 +1,4 @@
-import { UserButton, useUser } from "@clerk/nextjs";
-import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
 
 const Topbar = ({ title, modality }: any) => {
   const { user } = useUser();
@@ -11,6 +10,7 @@ const Topbar = ({ title, modality }: any) => {
         <div className="flex gap-4">
           <p
             onClick={() => {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-call
               modality(true);
             }}
             className="flex h-14 w-14 cursor-pointer items-center justify-center rounded-2xl border p-5 text-4xl"
