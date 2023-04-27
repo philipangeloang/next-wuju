@@ -1,9 +1,10 @@
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
+import { type NextPage } from "next";
 import Modal from "~/components/modal";
 import Topbar from "~/components/topbar";
 
-const Setting = () => {
+const Setting: NextPage = () => {
   const [modal, showModal] = useState(false);
   const { user } = useUser();
 

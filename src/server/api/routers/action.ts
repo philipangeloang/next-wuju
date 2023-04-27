@@ -27,4 +27,9 @@ export const actionRouter = createTRPCRouter({
         },
       });
     }),
+
+  getAction: publicProcedure.query(async ({ ctx }) => {
+    const posts = await ctx.prisma.action.findMany();
+    console.log(posts);
+  }),
 });

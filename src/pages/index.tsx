@@ -12,15 +12,6 @@ const Home: NextPage = () => {
 
   const createAction = api.action.action.useMutation({});
 
-  // createAction.mutate({
-  //   title: "Fees",
-  //   userId: "Test",
-  //   actionType: "Expense",
-  //   source: "Budget",
-  //   category: "Food",
-  //   amount: 5000,
-  // });
-
   if (!user) return <div>Log in first...</div>;
   return (
     <>
