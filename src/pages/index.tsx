@@ -10,8 +10,6 @@ const Home: NextPage = () => {
   const [modal, showModal] = useState(false);
   const { user } = useUser();
 
-  const createAction = api.action.action.useMutation({});
-
   if (!user) return <div>Log in first...</div>;
   return (
     <>

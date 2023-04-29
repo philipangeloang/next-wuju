@@ -49,11 +49,27 @@ const Activity: NextPage = () => {
                 </div>
                 <div className="col-span-2 font-semibold">{post.category}</div>
                 <div className="col-span-2 font-semibold">
-                  <span className="rounded-lg bg-red-500 px-2 py-1 text-xs text-white">
+                  <span
+                    className={
+                      post.actionType === "Expense"
+                        ? "rounded-lg bg-red-500 px-2 py-1 text-xs text-white"
+                        : "rounded-lg bg-emerald-500 px-2 py-1 text-xs text-white"
+                    }
+                  >
                     {post.actionType}
                   </span>
                 </div>
-                <div className="col-span-2 font-semibold">{post.source}</div>
+                <div className="col-span-2 font-semibold">
+                  <span
+                    className={
+                      post.source === "Budget"
+                        ? "col-span-2 rounded-lg bg-main-black px-2 py-1 text-xs font-semibold text-white"
+                        : "col-span-2 rounded-lg bg-emerald-500 px-2 py-1 text-xs font-semibold text-white"
+                    }
+                  >
+                    {post.source}
+                  </span>
+                </div>
                 <div className="col-span-2 font-semibold">April 28, 2023</div>
                 <div className="col-span-2 font-semibold">
                   <span className="text-red-500">{post.amount}</span>

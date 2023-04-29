@@ -1,7 +1,7 @@
+import { clerkClient } from "@clerk/nextjs/server";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { prisma } from "~/server/db";
 
 export const actionRouter = createTRPCRouter({
   action: publicProcedure
@@ -29,8 +29,12 @@ export const actionRouter = createTRPCRouter({
     }),
 
   getAction: publicProcedure.query(async ({ ctx }) => {
-    const posts = await ctx.prisma.action.findMany();
-    console.log(posts);
+    const posts = await ctx.prisma.action.findMany({
+      where: {
+        userId: ctx.currentUser || "",
+      },
+    });
+
     return posts;
   }),
 });
