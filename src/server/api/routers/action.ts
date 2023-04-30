@@ -4,7 +4,7 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const actionRouter = createTRPCRouter({
-  action: publicProcedure
+  addAction: publicProcedure
     .input(
       z.object({
         title: z.string(),
@@ -31,7 +31,7 @@ export const actionRouter = createTRPCRouter({
   getAction: publicProcedure.query(async ({ ctx }) => {
     const posts = await ctx.prisma.action.findMany({
       where: {
-        userId: ctx.currentUser || "",
+        userId: ctx.user || "",
       },
     });
 

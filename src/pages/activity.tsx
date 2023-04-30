@@ -7,6 +7,7 @@ import { api } from "~/utils/api";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { LoadingSpinner } from "~/components/loadingspinner";
 dayjs.extend(relativeTime);
 
 const Activity: NextPage = () => {
@@ -15,10 +16,20 @@ const Activity: NextPage = () => {
   const { user } = useUser();
   const { data, isLoading } = api.action.getAction.useQuery();
 
-  if (isLoading) return <div>Loading...</div>;
-  if (!data) return <div>Something went wrong fetching data...</div>;
+  if (isLoading) return <LoadingSpinner />;
+  if (!data)
+    return (
+      <div className="absolute z-20 flex items-center justify-center">
+        Something went wrong fetching data...
+      </div>
+    );
 
-  if (!user) return <div>Log in first...</div>;
+  if (!user)
+    return (
+      <div className="absolute z-20 flex items-center justify-center">
+        Log in first...
+      </div>
+    );
 
   return (
     <>
@@ -40,7 +51,7 @@ const Activity: NextPage = () => {
           {data.map((post) => {
             return (
               <>
-                <div className="col-span-2 flex items-center font-semibold">
+                <div className="col-span-2 flex font-semibold">
                   <input
                     type="checkbox"
                     className="mr-5 h-5 w-5 bg-off-white"
@@ -70,7 +81,9 @@ const Activity: NextPage = () => {
                     {post.source}
                   </span>
                 </div>
-                <div className="col-span-2 font-semibold">April 28, 2023</div>
+                <div className="col-span-2 font-semibold">
+                  {dayjs(post.createdAt).format().slice(0, 10)}
+                </div>
                 <div className="col-span-2 font-semibold">
                   <span className="text-red-500">{post.amount}</span>
                 </div>

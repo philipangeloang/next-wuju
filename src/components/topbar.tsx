@@ -1,4 +1,5 @@
 import { useUser } from "@clerk/nextjs";
+import Image from "next/image";
 
 interface ModalProps {
   title: string;
@@ -22,10 +23,12 @@ const Topbar = ({ title, modality }: ModalProps) => {
             +
           </p>
           {/* <UserButton /> */}
-          <img
+          <Image
             alt="profile"
             src={user.profileImageUrl}
             className="h-14 w-14 rounded-full"
+            width={56}
+            height={56}
           />
         </div>
       </div>

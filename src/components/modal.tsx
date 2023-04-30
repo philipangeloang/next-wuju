@@ -2,7 +2,11 @@ import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
 import { api } from "~/utils/api";
 
-const Modal = ({ modality }: any) => {
+interface ModalOnlyProps {
+  modality: (modality: boolean) => void;
+}
+
+const Modal = ({ modality }: ModalOnlyProps) => {
   const [capital, showCapital] = useState(true);
   const [reminder, showReminder] = useState(false);
 
@@ -14,14 +18,22 @@ const Modal = ({ modality }: any) => {
 
   const { user } = useUser();
 
+  const ctx = api.useContext();
+
   if (!user) return <div>Log in first...</div>;
 
-  const createAction = api.action.action.useMutation({});
+  const { mutate, isLoading } = api.action.addAction.useMutation({
+    onSuccess: () => {
+      setTitle("");
+      setAmount(0);
+      void ctx.action.getAction.invalidate();
+    },
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    createAction.mutate({
+    mutate({
       title: title,
       userId: user.id,
       actionType: actionType,
@@ -71,8 +83,10 @@ const Modal = ({ modality }: any) => {
                 onChange={(e) => {
                   setTitle(e.target.value);
                 }}
+                maxLength={15}
                 type="text"
                 className="rounded-lg border px-2 py-1"
+                disabled={isLoading}
               />
             </div>
             <div className="col-span-12 flex flex-col">
@@ -84,6 +98,7 @@ const Modal = ({ modality }: any) => {
                   setActionType(e.target.value);
                 }}
                 className="rounded-lg border px-2 py-1"
+                disabled={isLoading}
               >
                 <option>Expense</option>
                 <option>Gain</option>
@@ -98,6 +113,7 @@ const Modal = ({ modality }: any) => {
                   setSource(e.target.value);
                 }}
                 className="rounded-lg border px-2 py-1"
+                disabled={isLoading}
               >
                 <option>Budget</option>
                 <option>Savings</option>
@@ -112,6 +128,7 @@ const Modal = ({ modality }: any) => {
                   setCategory(e.target.value);
                 }}
                 className="rounded-lg border px-2 py-1"
+                disabled={isLoading}
               >
                 <option>Food</option>
                 <option>Transportation</option>
@@ -133,20 +150,20 @@ const Modal = ({ modality }: any) => {
                 }}
                 type="number"
                 className="rounded-lg border px-2 py-1"
+                disabled={isLoading}
               />
             </div>
 
             <div className="col-span-12 mt-4 flex justify-around gap-4">
               <div
                 onClick={() => {
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
                   modality(false);
                 }}
-                className="w-full cursor-pointer rounded-lg bg-red-500 p-2 text-center font-semibold text-white"
+                className="w-full cursor-pointer rounded-lg bg-red-500 p-2 text-center font-semibold text-white hover:bg-red-700"
               >
                 Cancel
               </div>
-              <button className="w-full rounded-lg bg-emerald-500 p-2 text-center font-semibold text-white">
+              <button className="w-full rounded-lg bg-emerald-500 p-2 text-center font-semibold text-white hover:bg-emerald-700">
                 Post
               </button>
             </div>

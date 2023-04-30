@@ -1,6 +1,5 @@
 import { useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
-import Image from "next/image";
 import { useState } from "react";
 import Modal from "~/components/modal";
 import Topbar from "~/components/topbar";
